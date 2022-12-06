@@ -1,7 +1,7 @@
 """
 Presentation layer
 """
-from nb_business import new_item
+from nb_business import create_new_file, read_old_file
 
 
 def get_action():
@@ -17,29 +17,11 @@ def get_action():
         choice = choice.lower()
         
         if choice == '1':
-
-            structure = input('1. List\n2. Note\n >')
             title = input('Title: > ')
-            items = []
-
-            if structure == '1':
-                new_list = []
-                for i in range(1, 100):
-                    list_item = input(f'{i}.item: >')
-                    if list_item == 'q':
-                        break
-                    new_list.append(list_item)
-
-                items.append(new_list)
-
-            if structure == '2':
-                item = input('Note: >')
-                items.append(item)
-
-            new_item(structure, title, items)
+            print(create_new_file(title))
 
         if choice == '2' or choice == 'read':
-            print('Read')
+            print(read_old_file())
 
         if choice == '3' or choice == 'update':
             print('Update')
