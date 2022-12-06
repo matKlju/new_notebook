@@ -3,31 +3,24 @@ Database layer
 """
 from datetime import date
 
-notes_and_lists = []
+files = []
 
 
 def new_file(title):
     try:
         with open(f'{title}.txt', 'x'):
-            notes_and_lists.append(f'{title}')
+            dt = date.today()
+            files.append(f'{title} {dt}')
             return True
 
     except FileExistsError:
         return False
 
 
-def read_file():
-    for i in enumerate(notes_and_lists):
-        print(f'{i[0]}. {i[1]}')
+def read_file(num):
 
-    choice = input('Read note: > ')
-
-    try:
-        with open(f'{choice}.txt') as file:
-            print(file.read())
-
-    except FileNotFoundError:
-        print('File not found!')
+    with open(f'{files[int(num) - 1]}.txt') as file:
+        return file.read()
 
 
 def new_list(title):
@@ -43,10 +36,10 @@ def new_list(title):
             #     dict_list[f'{i[0]}.'] = i[1]
             #     # for loop iterator as a key and item as value
             #
-            # notes_and_lists.append(dict_list)
+            # files.append(dict_list)
             # # Append user dict to global variable notes_an_lists
             #
-            # file.write(f'{notes_and_lists}\n')
+            # file.write(f'{files}\n')
 
     except FileExistsError:
         return False
@@ -60,13 +53,11 @@ def new_note(title):
     while True:
         try:
             with open(f'{title}.txt', 'x'):
-
+                pass
                 # dict_note['Note: '] = note
                 #
-                # notes_and_lists.append(dict_note)
-                # file.write(f'{notes_and_lists}\n')
+                # files.append(dict_note)
+                # file.write(f'{files}\n')
 
         except FileExistsError:
             return False
-
-

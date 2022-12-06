@@ -1,15 +1,21 @@
 """
 Business layer
 """
-from nb_database import new_file, read_file
+from nb_database import new_file, read_file, files
+
+
+def get_file_list():
+    return files
 
 
 def create_new_file(title):
-    new_file(title)
+    if new_file(title):
+        return f"File '{title}' created!"
+    return 'File name already exists! Try Again!'
 
 
-def read_old_file():
-    read_file()
+def read_old_file(num):
+    return read_file(num)
 
 
 def update_old_file():
