@@ -9,8 +9,7 @@ files = []
 def new_file(title):
     try:
         with open(f'{title}.txt', 'x'):
-            dt = date.today()
-            files.append(f'{title} {dt}')
+            files.append(f'{title}')
             return True
 
     except FileExistsError:

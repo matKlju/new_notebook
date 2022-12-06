@@ -40,7 +40,7 @@ def get_action():
 
             list_num = input('List/ note to update #: > ')
 
-            title = files[list_num]
+            title = files[int(list_num)]
 
             print(read_old_file(list_num))
 
