@@ -23,6 +23,17 @@ def read_file(num):
         return file.read()
 
 
+def update_file(title, data):
+    try:
+        with open(f'{title}.txt', 'a') as file:
+            dt = date.today()
+            file.write(f'{dt} {data}')
+            return True
+
+    except FileExistsError:
+        return False
+
+
 def new_list(title):
     # dict_list = {}
     # dt = date.today()
