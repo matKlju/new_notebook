@@ -1,7 +1,7 @@
 """
 Presentation layer
 """
-from nb_business import create_new_file, read_old_file, update_old_file, get_file_list
+from nb_business import create_new_file, read_old_file, update_old_file, delete_old_file, get_file_list
 
 
 def get_action():
@@ -18,7 +18,11 @@ def get_action():
         
         if choice == '1':
             title = input('Title: > ')
-            print(create_new_file(title))
+
+            if create_new_file(title):
+                print(f"File '{title}' created!")
+            else:
+                print('File name already exists! Try Again!')
 
         if choice == '2':
             files = get_file_list()
@@ -27,9 +31,12 @@ def get_action():
             for i in enumerate(files, 1):
                 print(f'{i[0]}. {i[1]}')
 
-            list_num = input('List/ note #: > ')
+            list_num = int(input('List/ note #: > '))
 
-            print(read_old_file(list_num))
+            if read_old_file(list_num):
+                print(read_old_file(list_num))
+            else:
+                print('No such file! Try Again!')
 
         if choice == '3':
             files = get_file_list()
@@ -40,17 +47,31 @@ def get_action():
 
             list_num = input('List/ note to update #: > ')
 
-            title = files[int(list_num)]
+            title = files[int(list_num) - 1]
 
             print(read_old_file(list_num))
 
             data = input('Update item: >')
 
             update_old_file(title, data)
-            print(f'updated')
+            print(f'{title} updated!')
 
         if choice == '4':
-            print('Delete')
+            files = get_file_list()
+
+            # Display saved files
+            for i in enumerate(files, 1):
+                print(f'{i[0]}. {i[1]}')
+
+            list_num = input('List/ note to delete #: > ')
+
+            title = files[int(list_num) - 1]
+
+            print(read_old_file(list_num))
+
+            delete_old_file(title)
+
+            print(f'{title} deleted!')
 
 
 if __name__ == '__main__':
